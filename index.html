@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Lecteur Ruffle</title>
+</head>
+<body>
+  <div id="player-container"></div>
+
+  <!-- Configuration globale de Ruffle -->
+  <script>
+    window.RufflePlayer = window.RufflePlayer || {};
+    window.RufflePlayer.config = {
+      autoplay: "on",
+      unmuteOverlay: "hidden",
+      warnOnUnsupportedContent: false
+    };
+  </script>
+
+  <!-- Chargement de Ruffle depuis le CDN -->
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const ruffle = window.RufflePlayer.newest();
+      const player = ruffle.createPlayer();
+
+      player.style.width = "800px";
+      player.style.height = "600px";
+
+      document.getElementById("player-container").appendChild(player);
+
+      player.load("oldskool1bis_Object_bis_scene.swf");
+    });
+  </script>
+</body>
+</html>

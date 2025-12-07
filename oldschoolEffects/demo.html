@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Font_v3 Demo - Effet de texte pixelisé</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background: #000;
+        color: #fff;
+        overflow-x: hidden;
+      }
+
+      #container {
+        position: relative;
+        width: 100%;
+        height: 600px;
+        background: #111;
+        border: 1px solid #333;
+        overflow: visible;
+      }
+
+      .controls {
+        margin: 20px 0;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      button {
+        padding: 10px 20px;
+        background: #333;
+        color: #fff;
+        border: 1px solid #555;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      button:hover {
+        background: #555;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        background: #222;
+        color: #fff;
+        border: 1px solid #555;
+        font-size: 14px;
+        width: 200px;
+      }
+
+      h1 {
+        color: #fff;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Effet de texte pixelisé - Font_v3</h1>
+
+    <div class="controls">
+      <input
+        type="text"
+        id="textInput"
+        value="hello world"
+        placeholder="Entrez votre texte"
+      />
+      <button onclick="displayText()">Afficher le texte</button>
+      <button onclick="startAnimation()">Démarrer animation</button>
+      <button onclick="stopAnimation()">Arrêter animation</button>
+      <button onclick="startSinWave()">Effet sinusoïdal</button>
+      <button onclick="stopSinWave()">Arrêter sinusoïdal</button>
+      <button onclick="clearDisplay()">Effacer</button>
+    </div>
+
+    <div id="container"></div>
+
+    <script type="module">
+      import { Font_v3 } from "./dist/Font_v3.js";
+
+      let fontInstance = null;
+      const container = document.getElementById("container");
+
+      window.displayText = function () {
+        const text = document.getElementById("textInput").value.toLowerCase();
+
+        if (fontInstance) {
+          fontInstance.destroy();
+        }
+
+        fontInstance = new Font_v3(container);
+        fontInstance.makeGlobalArray(text);
+        fontInstance.affiche_alt();
+      };
+
+      window.startAnimation = function () {
+        if (fontInstance) {
+          fontInstance.setIntervalStart(2000);
+        }
+      };
+
+      window.stopAnimation = function () {
+        if (fontInstance) {
+          fontInstance.clearIntervals();
+        }
+      };
+
+      window.startSinWave = function () {
+        if (fontInstance) {
+          fontInstance.launchSin(0);
+        }
+      };
+
+      window.stopSinWave = function () {
+        if (fontInstance) {
+          fontInstance.stopSin();
+        }
+      };
+
+      window.clearDisplay = function () {
+        if (fontInstance) {
+          fontInstance.destroy();
+          fontInstance = null;
+        }
+      };
+
+      // Afficher le texte par défaut au chargement
+      window.addEventListener("DOMContentLoaded", () => {
+        displayText();
+      });
+    </script>
+  </body>
+</html>

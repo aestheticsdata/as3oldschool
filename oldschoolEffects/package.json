@@ -1,0 +1,22 @@
+{
+  "name": "oldschool-effects",
+  "version": "1.0.0",
+  "description": "Effet de texte pixelisé converti depuis ActionScript 3",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "typescript",
+    "pixel-art",
+    "text-effect",
+    "animation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
+
